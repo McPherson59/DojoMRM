@@ -1,0 +1,35 @@
+@import '@axa-fr/react-toolkit-core/dist/assets/scss/core.scss';
+
+.home {
+  .af-title--color {
+    color: $color-gray-1;
+  }
+}
+label {
+  width: 80px;
+}
+.badge {
+  margin-left: 10px;
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #28a745;
+}
+.badge-danger {
+  color: #fff;
+  background-color: #dc3545;
+}
+
+.container-center {
+  text-align: center;
+}
