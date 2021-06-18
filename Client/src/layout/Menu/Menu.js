@@ -24,7 +24,27 @@ export const Menu = ({ location }) => (
       })}
       actionElt={
         <Link className="af-nav__link" to="/simulateurtransports">
-          Transports
+          Exercice 1
+        </Link>
+      }
+    />
+    <NavBarItem
+      classModifier={classNames({
+        active: location && location.pathname === '/simulateurTransports',
+      })}
+      actionElt={
+        <Link className="af-nav__link" to="/simulateurtransports">
+          Exercice 2
+        </Link>
+      }
+    />
+    <NavBarItem
+      classModifier={classNames({
+        active: location && location.pathname === '/simulateurTransports',
+      })}
+      actionElt={
+        <Link className="af-nav__link" to="/simulateurtransports">
+          Exercice 3
         </Link>
       }
     />

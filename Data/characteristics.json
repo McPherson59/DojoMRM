@@ -1,7 +1,723 @@
 {
     "instances": [
-        { "nom": "I1", "coutMensuel": 144 },
-		{ "nom": "I2", "coutMensuel": 288 },
-		{ "nom": "I3", "coutMensuel": 576 }
+        {
+            "nom": "I1",
+            "coutMensuel": 144
+        },
+        {
+            "nom": "I2",
+            "coutMensuel": 288
+        },
+        {
+            "nom": "I3",
+            "coutMensuel": 576
+        }
+    ],
+    "carburants": [
+        {
+            "carburant": "Gasoil",
+            "emissionKgCO2ParUnite": 2.67,
+            "energiekWh": 10.74,
+            "unite": "l"
+        },
+        {
+            "carburant": "Essence",
+            "emissionKgCO2ParUnite": 2.3,
+            "energiekWh": 9.63,
+            "unite": "l"
+        },
+        {
+            "carburant": "Ethanol ( E85 )",
+            "emissionKgCO2ParUnite": 1.65,
+            "energiekWh": 6.5,
+            "unite": "l"
+        },
+        {
+            "carburant": "GPL",
+            "emissionKgCO2ParUnite": 1.66,
+            "energiekWh": 7.46325,
+            "unite": "l"
+        },
+        {
+            "carburant": "Electrique (Allemagne)",
+            "emissionKgCO2ParUnite": 0.435,
+            "energiekWh": 1,
+            "unite": "kWh"
+        },
+        {
+            "carburant": "Electrique (Chine)",
+            "emissionKgCO2ParUnite": 0.766,
+            "energiekWh": 1,
+            "unite": "kWh"
+        },
+        {
+            "carburant": "Electrique (Etats-Unis)",
+            "emissionKgCO2ParUnite": 0.522,
+            "energiekWh": 1,
+            "unite": "kWh"
+        },
+        {
+            "carburant": "Electrique (France)",
+            "emissionKgCO2ParUnite": 0.102,
+            "energiekWh": 1,
+            "unite": "kWh"
+        }
+    ],
+    "typeVehicules": [
+        {
+            "segment": "A",
+            "type": "Citadines"
+        },
+        {
+            "segment": "B",
+            "type": "Citadines Polyvalentes"
+        },
+        {
+            "segment": "C",
+            "type": "Compactes"
+        },
+        {
+            "segment": "D",
+            "type": "Familiales"
+        },
+        {
+            "segment": "E",
+            "type": "Grandes Routières"
+        },
+        {
+            "segment": "SUV",
+            "type": "SUV"
+        }
+    ],
+    "consommationTrajetPArTypeVehicule": [
+        {
+            "carburant": "Gasoil",
+            "trajet": "Ville",
+            "segment": "A",
+            "consommation": 5.2,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Ville",
+            "segment": "B",
+            "consommation": 6.2,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Ville",
+            "segment": "C",
+            "consommation": 6.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Ville",
+            "segment": "D",
+            "consommation": 7.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Ville",
+            "segment": "E",
+            "consommation": 8.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Ville",
+            "segment": "SUV",
+            "consommation": 5.7,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Route",
+            "segment": "A",
+            "consommation": 3.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Route",
+            "segment": "B",
+            "consommation": 4.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Route",
+            "segment": "C",
+            "consommation": 4.4,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Route",
+            "segment": "D",
+            "consommation": 4.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Route",
+            "segment": "E",
+            "consommation": 5,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Gasoil",
+            "trajet": "Route",
+            "segment": "SUV",
+            "consommation": 5.4,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Ville",
+            "segment": "A",
+            "consommation": 7.2,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Ville",
+            "segment": "B",
+            "consommation": 7.6,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Ville",
+            "segment": "C",
+            "consommation": 9.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Ville",
+            "segment": "D",
+            "consommation": 10,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Ville",
+            "segment": "E",
+            "consommation": 15.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Ville",
+            "segment": "SUV",
+            "consommation": 7.1,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Route",
+            "segment": "A",
+            "consommation": 4.6,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Route",
+            "segment": "B",
+            "consommation": 4.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Route",
+            "segment": "C",
+            "consommation": 5.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Route",
+            "segment": "D",
+            "consommation": 6.1,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Route",
+            "segment": "E",
+            "consommation": 7.7,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Essence",
+            "trajet": "Route",
+            "segment": "SUV",
+            "consommation": 6.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Ville",
+            "segment": "A",
+            "consommation": 7.6,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Ville",
+            "segment": "B",
+            "consommation": 7.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Ville",
+            "segment": "C",
+            "consommation": 8.2,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Ville",
+            "segment": "D",
+            "consommation": 10,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Ville",
+            "segment": "E",
+            "consommation": 14.2,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Ville",
+            "segment": "SUV",
+            "consommation": 7,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Route",
+            "segment": "A",
+            "consommation": 4.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Route",
+            "segment": "B",
+            "consommation": 4.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Route",
+            "segment": "C",
+            "consommation": 5.4,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Route",
+            "segment": "D",
+            "consommation": 5.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Route",
+            "segment": "E",
+            "consommation": 9.3,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "GPL",
+            "trajet": "Route",
+            "segment": "SUV",
+            "consommation": 6.7,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Ville",
+            "segment": "A",
+            "consommation": 8.28,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Ville",
+            "segment": "B",
+            "consommation": 8.74,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Ville",
+            "segment": "C",
+            "consommation": 11.27,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Ville",
+            "segment": "D",
+            "consommation": 11.5,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Ville",
+            "segment": "E",
+            "consommation": 18.285,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Ville",
+            "segment": "SUV",
+            "consommation": 8.165,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Route",
+            "segment": "A",
+            "consommation": 4.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Route",
+            "segment": "B",
+            "consommation": 5.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Route",
+            "segment": "C",
+            "consommation": 6.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Route",
+            "segment": "D",
+            "consommation": 7.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Route",
+            "segment": "E",
+            "consommation": 8.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Ethanol",
+            "trajet": "Route",
+            "segment": "SUV",
+            "consommation": 10.8,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Ville",
+            "segment": "A",
+            "consommation": 10,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Ville",
+            "segment": "B",
+            "consommation": 18,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Ville",
+            "segment": "C",
+            "consommation": 17,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Ville",
+            "segment": "D",
+            "consommation": 16,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Ville",
+            "segment": "E",
+            "consommation": 20,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Ville",
+            "segment": "SUV",
+            "consommation": 14.9,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Route",
+            "segment": "A",
+            "consommation": 10,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Route",
+            "segment": "B",
+            "consommation": 18,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Route",
+            "segment": "C",
+            "consommation": 17,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Route",
+            "segment": "D",
+            "consommation": 16,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Route",
+            "segment": "E",
+            "consommation": 20,
+            "unite": "L",
+            "distance": "100km"
+        },
+        {
+            "carburant": "Electrique",
+            "trajet": "Route",
+            "segment": "SUV",
+            "consommation": 14.9,
+            "unite": "L",
+            "distance": "100km"
+        }
+    ],
+    "comparaisonEmissionCO2": [
+        {
+            "domaine": "Transport",
+            "item": "Vol Aller Paris/NY pour 1 personne",
+            "emissionCO2kg": 500
+        },
+        {
+            "domaine": "Transport",
+            "item": "Vol Aller-Retour Paris/NY pour 1 personne",
+            "emissionCO2kg": 1000
+        },
+        {
+            "domaine": "Nourriture",
+            "item": "1 kg de boeuf",
+            "emissionCO2kg": 35.8
+        },
+        {
+            "domaine": "Nourriture",
+            "item": "1 kg de porc",
+            "emissionCO2kg": 12.1
+        },
+        {
+            "domaine": "Nourriture",
+            "item": "1 kg de poulet",
+            "emissionCO2kg": 6.9
+        },
+        {
+            "domaine": "Electronique",
+            "item": "1 TV de 40 à 49 pouces",
+            "emissionCO2kg": 55
+        },
+        {
+            "domaine": "Electronique",
+            "item": "1 ordinateur portable",
+            "emissionCO2kg": 30
+        },
+        {
+            "domaine": "Electronique",
+            "item": "1 smartphone",
+            "emissionCO2kg": 18
+        }
+    ],
+    "comparaisonEnergie": [
+        {
+            "domaine": "Transport",
+            "nom": "1L Gasoil",
+            "energiekWh": 10.74
+        },
+        {
+            "domaine": "Transport",
+            "nom": "1L Essence",
+            "energiekWh": 9.63
+        },
+        {
+            "domaine": "Transport",
+            "nom": "1L GPL",
+            "energiekWh": 7.46325
+        },
+        {
+            "domaine": "Transport",
+            "nom": "1L Ethanol (E85)",
+            "energiekWh": 6.5
+        },
+        {
+            "domaine": "Transport",
+            "nom": "100 km en voiture électrique",
+            "energiekWh": 18
+        },
+        {
+            "domaine": "Travail",
+            "nom": "1h de travail de force humain",
+            "energiekWh": 0.5
+        },
+        {
+            "domaine": "Travail",
+            "nom": "1 journée de travail de force humain",
+            "energiekWh": 5
+        },
+        {
+            "domaine": "Travail",
+            "nom": "1 mois de travail de force humain",
+            "energiekWh": 100
+        },
+        {
+            "domaine": "Travail",
+            "nom": "1 an de travail de force humain",
+            "energiekWh": 1090
+        }
+    ],
+    "consommationAppareilsElectriques": [
+        {
+            "objet": "Ampoule",
+            "puissanceW": 60
+        },
+        {
+            "objet": "Ampoule (LED)",
+            "puissanceW": 7
+        },
+        {
+            "objet": "Grille-Pain",
+            "puissanceW": 500
+        },
+        {
+            "objet": "Four micro-onde",
+            "puissanceW": 900
+        },
+        {
+            "objet": "Chauffage électrique",
+            "puissanceW": 1000
+        },
+        {
+            "objet": "Sèche cheveux",
+            "puissanceW": 2500
+        },
+        {
+            "objet": "Laptop",
+            "puissanceW": 30
+        },
+        {
+            "objet": "Desktop",
+            "puissanceW": 60
+        },
+        {
+            "objet": "Ordinateur (Gaming)",
+            "puissanceW": 700
+        },
+        {
+            "objet": "TV connectée",
+            "puissanceW": 120
+        }
+    ],
+    "IntensiteElectrique": [
+        {
+            "pays": "France",
+            "kgCO2parkWh": 0.102
+        },
+        {
+            "pays": "Allemagne",
+            "kgCO2parkWh": 0.435
+        },
+        {
+            "pays": "Chine",
+            "kgCO2parkWh": 0.766
+        },
+        {
+            "pays": "Etats-Unis",
+            "kgCO2parkWh": 0.522
+        }
     ]
 }
