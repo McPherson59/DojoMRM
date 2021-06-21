@@ -6,7 +6,8 @@ import { InstanceService } from '../../services/calc/instance-service';
 import './ConsommationVoiture.scss';
 
 export const ConsommationVoiture = () => {
-  const [emissionNumber, setEmissionNumber] = useState(0);
+  const [consommationNumber, setConsommationNumber] = useState(0);
+  const [typeCarburant, setTypeCarburant] = useState('');
 
   const [hasResults, setHasResults] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -14,15 +15,16 @@ export const ConsommationVoiture = () => {
   const calculatorService = new InstanceService();
   //const emissionData = calculatorService.getEmmissionData('');
   const emissionData = 0;
+  const energieData = 0;
 
   useEffect(() => {
     setHasResults(false);
-    if (emissionNumber > 0) {
+    if (consommationNumber > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [emissionNumber]);
+  }, [consommationNumber]);
 
   const classNameBtn = isDisabled
     ? 'hasiconLeft calculate disabled'
@@ -42,47 +44,37 @@ export const ConsommationVoiture = () => {
           l'énergie en kWh que cela représente.
         </p>{' '}
         <Table className="af-table">
-          <Table.Header>
-            <Table.Tr>
-              <Table.Th>
-                <span className="af-table-th-content">
-                  <span
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="144€ /mois">
-                    i1{' '}
-                  </span>{' '}
-                  <HelpButton classModifier="small" mode="hover">
-                    <ul>
-                      <li> Prix: {emissionData.coutMensuel}€ /mois</li>
-                      <li> Ressources: </li>{' '}
-                      <ul>
-                        <li>
-                          {' '}
-                          {emissionData.acu}
-                          ACU{' '}
-                        </li>{' '}
-                        <li>
-                          {' '}
-                          {emissionData.ram}
-                          Go RAM{' '}
-                        </li>{' '}
-                      </ul>{' '}
-                    </ul>{' '}
-                  </HelpButton>{' '}
-                </span>{' '}
-              </Table.Th>{' '}
-            </Table.Tr>{' '}
-          </Table.Header>{' '}
           <Table.Body>
             <Table.Tr>
+              <Table.Td>Type de Carburant :</Table.Td>
+              <Table.Td>
+                <span>
+                  <Text
+                    id="typeCarburant"
+                    name="typeCarburant"
+                    value={typeCarburant}
+                    onChange={({ value }) => 0}
+                  />
+                </span>{' '}
+              </Table.Td>{' '}
+              <Table.Td>
+                Emission : <b>{emissionData} kg de CO²</b>{' '}
+              </Table.Td>{' '}
+            </Table.Tr>
+            <Table.Tr>
+              <Table.Td>Consommation (en L) :</Table.Td>{' '}
               <Table.Td>
                 <Text
-                  id="i1-nb"
-                  name="i1-nb"
-                  value={emissionNumber}
+                  id="consommation"
+                  name="consommation"
+                  value={consommationNumber}
                   onChange={({ value }) => 0}
                 />{' '}
+              </Table.Td>{' '}
+              <Table.Td>
+                <p>
+                  Energie : <b>{energieData} kWh</b>
+                </p>{' '}
               </Table.Td>{' '}
             </Table.Tr>{' '}
           </Table.Body>{' '}
