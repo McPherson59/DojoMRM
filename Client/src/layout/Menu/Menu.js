@@ -20,31 +20,43 @@ export const Menu = ({ location }) => (
     />
     <NavBarItem
       classModifier={classNames({
-        active: location && location.pathname === '/simulateurTransports',
+        active:
+          location && location.pathname === '/simulateurConsommationVoiture',
       })}
       actionElt={
-        <Link className="af-nav__link" to="/simulateurtransports">
+        <Link className="af-nav__link" to="/simulateurconsommationvoiture">
           Exercice 1
         </Link>
       }
     />
     <NavBarItem
       classModifier={classNames({
-        active: location && location.pathname === '/simulateurTransports',
+        active: location && location.pathname === '/simulateurTrajetSimple',
       })}
       actionElt={
-        <Link className="af-nav__link" to="/simulateurtransports">
-          Exercice 2
+        <Link className="af-nav__link" to="/simulateurtrajetsimple">
+          Exercice 1 bis
         </Link>
       }
     />
     <NavBarItem
       classModifier={classNames({
-        active: location && location.pathname === '/simulateurTransports',
+        active: location && location.pathname === '/simulateurTrajetMixte',
       })}
       actionElt={
-        <Link className="af-nav__link" to="/simulateurtransports">
-          Exercice 3
+        <Link className="af-nav__link" to="/simulateurtrajetmixte">
+          Exercice 1 ter
+        </Link>
+      }
+    />
+    <NavBarItem
+      classModifier={classNames({
+        active:
+          location && location.pathname === '/simulateurComparaisonEmission',
+      })}
+      actionElt={
+        <Link className="af-nav__link" to="/simulateurcomparaisonemission">
+          Exercice 2
         </Link>
       }
     />

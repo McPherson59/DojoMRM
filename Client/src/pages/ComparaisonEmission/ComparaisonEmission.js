@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { CardPrice } from 'pages/Transports/CardPrice/CardPrice';
+import { CardPrice } from 'pages/ComparaisonEmission/CardPrice/CardPrice';
 import { Table, Text, Button, HelpButton } from '@axa-fr/react-toolkit-all';
 import { CalculatorService } from '../../services/calc/calculator-service';
 import { InstanceService } from '../../services/calc/instance-service';
-import './Transports.scss';
+import './ComparaisonEmission.scss';
 
-export const Transports = () => {
+export const ComparaisonEmission = () => {
   const [emissionNumber, setEmissionNumber] = useState(0);
 
   const [hasResults, setHasResults] = useState(false);
@@ -32,8 +32,14 @@ export const Transports = () => {
       <div className="container container-body">
         <p className="af-body--content">
           {' '}
-          Calculez les émissions de Gaz à effet de Serre dues à vos trajets.
-          <br></br> Et comparez-les avec d'autres sources d'émission.
+          Comparez vos émissions de CO² à des éléments de la vie de tous les
+          jours pour bien se représenter les impacts de vos activités.
+          <br></br> En tant qu'utilisateur, j'ai fait un use case 1 ou 1bis.
+          Puis je choisis:
+          <ul>
+            <li>un domaine,</li>
+            <li>un élément de comparaison.</li>
+          </ul>
         </p>{' '}
         <Table className="af-table">
           <Table.Header>
