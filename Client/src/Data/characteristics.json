@@ -1,16 +1,36 @@
 {
-    "instances": [
+    "carburantsListe": [
         {
-            "nom": "I1",
-            "coutMensuel": 144
+            "label": "Gasoil",
+            "value": "Gasoil"
         },
         {
-            "nom": "I2",
-            "coutMensuel": 288
+            "label": "Essence",
+            "value": "Essence"
         },
         {
-            "nom": "I3",
-            "coutMensuel": 576
+            "label": "Ethanol ( E85 )",
+            "value": "Ethanol ( E85 )"
+        },
+        {
+            "label": "GPL",
+            "value": "GPL"
+        },
+        {
+            "label": "Electrique (Allemagne)",
+            "value": "Electrique (Allemagne)"
+        },
+        {
+            "label": "Electrique (Chine)",
+            "value": "Electrique (Chine)"
+        },
+        {
+            "label": "Electrique (Etats-Unis)",
+            "value": "Electrique (Etats-Unis)"
+        },
+        {
+            "label": "Electrique (France)",
+            "value": "Electrique (France)"
         }
     ],
     "carburants": [

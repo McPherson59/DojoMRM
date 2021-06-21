@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Table, Text, Button, HelpButton } from '@axa-fr/react-toolkit-all';
-import { CalculatorService } from '../../services/calc/calculator-service';
-import { InstanceService } from '../../services/calc/instance-service';
+import React from 'react';
 import './Home.scss';
 
 export const HomeComponent = () => {

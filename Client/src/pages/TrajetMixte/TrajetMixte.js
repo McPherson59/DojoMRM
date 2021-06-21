@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { CardPrice } from 'pages/TrajetMixte/CardPrice/CardPrice';
 import { Table, Text, Button, HelpButton } from '@axa-fr/react-toolkit-all';
-import { CalculatorService } from '../../services/calc/calculator-service';
-import { InstanceService } from '../../services/calc/instance-service';
+import { DataService } from '../../services/dataaccess/data-service';
+import { EmissionService } from '../../services/calc/emission-service';
 import './TrajetMixte.scss';
 
 export const TrajetMixte = () => {
@@ -11,7 +10,7 @@ export const TrajetMixte = () => {
   const [hasResults, setHasResults] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const calculatorService = new InstanceService();
+  const emissionService = new EmissionService();
   //const emissionData = calculatorService.getEmmissionData('');
   const emissionData = 0;
 
