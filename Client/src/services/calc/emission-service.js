@@ -10,4 +10,10 @@ export class EmissionService {
     const energie = energieParUnite * nbUnites;
     return Math.round(energie * 100) / 100;
   }
+
+  getConsommationTrajet(distance, consommation) {
+    const consommationTrajet =
+      Math.round(distance * consommation * 100) / 10000;
+    return consommationTrajet;
+  }
 }

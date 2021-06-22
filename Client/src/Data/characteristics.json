@@ -33,6 +33,16 @@
             "value": "Electrique (France)"
         }
     ],
+    "trajetsListe": [
+        {
+            "label": "Ville",
+            "value": "Ville"
+        },
+        {
+            "label": "Route",
+            "value": "Route"
+        }
+    ],
     "carburants": [
         {
             "carburant": "Gasoil",

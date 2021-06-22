@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Text, Button, SelectBase } from '@axa-fr/react-toolkit-all';
+import { Table, Number, Button, SelectBase } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
 import { EmissionService } from '../../services/calc/emission-service';
 import './ConsommationVoiture.scss';
@@ -22,6 +22,12 @@ export const ConsommationVoiture = () => {
     return carburantsData.getCarburantsListe();
   };
 
+  const setChangeCarburant = value => {
+    const data = carburantsData.getCarburantData(value);
+    setUniteCarburant(data.unite);
+    setTypeCarburant(value);
+  };
+
   const calculHandler = () => {
     const data = carburantsData.getCarburantData(typeCarburant);
     const emissionParUnite = data.emissionKgCO2ParUnite;
@@ -40,24 +46,6 @@ export const ConsommationVoiture = () => {
 
     setHasResults(true);
   };
-
-  /*const setChangeCarburant = value => {
-    console.log('value');
-    console.log(value);
-    console.log('typeCarburant');
-    console.log(typeCarburant);
-
-    const data = carburantsData.getCarburantData(typeCarburant);
-    const unite = data.unite;
-
-    console.log('unite');
-    console.log(unite);
-
-    setUniteCarburant(carburantsData.getCarburantData(typeCarburant).unite);
-    if (consommationNumber > 0) {
-      calculHandler();
-    }
-  };*/
 
   useEffect(() => {
     setHasResults(false);
@@ -89,20 +77,19 @@ export const ConsommationVoiture = () => {
         <Table className="af-table">
           <Table.Header>
             <Table.Tr>
-              <Table.Th>Description</Table.Th>
-              <Table.Th>Inputs</Table.Th>
+              <Table.Th>Type de Carburant</Table.Th>
+              <Table.Th>Consommation (en {uniteCarburant})</Table.Th>
               <Table.Th>Résultats</Table.Th>
             </Table.Tr>
           </Table.Header>
 
           <Table.Body>
             <Table.Tr>
-              <Table.Td width="300px">Type de Carburant :</Table.Td>
-              <Table.Td width="300px">
+              <Table.Td>
                 <SelectBase
                   name="typeCarburant"
                   id="typeCarburant"
-                  onChange={({ value }) => setTypeCarburant(value)}
+                  onChange={({ value }) => setChangeCarburant(value)}
                   options={getCarburantOptions()}
                   value={typeCarburant}
                   placeholder="- Select -"
@@ -112,27 +99,24 @@ export const ConsommationVoiture = () => {
                   helpMessage=""
                 />
               </Table.Td>
-              <Table.Td width="300px">
+              <Table.Td>
+                <Number
+                  id="consommation"
+                  name="consommation"
+                  value={consommationNumber}
+                  type="number"
+                  step="0.1"
+                  onChange={({ value }) => {
+                    setConsommationNumber(value);
+                  }}
+                />
+              </Table.Td>
+              <Table.Td>
                 {hasResults && (
                   <div>
                     Emission : <b>{emissionResultat} kg de CO²</b>
                   </div>
                 )}
-              </Table.Td>
-            </Table.Tr>
-            <Table.Tr>
-              <Table.Td>Consommation (en {uniteCarburant}) :</Table.Td>
-              <Table.Td>
-                <Text
-                  id="consommation"
-                  name="consommation"
-                  value={consommationNumber}
-                  onChange={({ value }) =>
-                    setConsommationNumber(parseFloat(value) || '0')
-                  }
-                />
-              </Table.Td>
-              <Table.Td>
                 {hasResults && (
                   <div>
                     Energie : <b>{energieResultat} kWh</b>
