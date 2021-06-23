@@ -16,4 +16,9 @@ export class EmissionService {
       Math.round(distance * consommation * 100) / 10000;
     return consommationTrajet;
   }
+
+  getComparaison(element1, element2) {
+    const comparaison = Math.round((element1 / element2) * 10000) / 100;
+    return comparaison;
+  }
 }

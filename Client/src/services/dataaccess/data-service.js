@@ -15,6 +15,10 @@ export class DataService {
     return characteristics.trajetsListe;
   }
 
+  getComparaisonDomaineListe() {
+    return characteristics.comparaisonDomaine;
+  }
+
   getTypeVehiculesListe() {
     const rawTypeVehicules = characteristics.typeVehicules;
 
@@ -53,5 +57,26 @@ export class DataService {
     }
 
     return CarburantSimple;
+  }
+
+  getComparaisonElementsListe(domaine) {
+    const rawDomaine = characteristics.comparaisonEmissionCO2.filter(
+      characteristic => characteristic.domaine === domaine
+    );
+
+    const transformedDomaine = rawDomaine.map(obj => {
+      return {
+        value: obj.item,
+        label: obj.item,
+      };
+    });
+
+    return transformedDomaine;
+  }
+
+  getComparaisonElements(item) {
+    return characteristics.comparaisonEmissionCO2.find(
+      characteristic => characteristic.item === item
+    );
   }
 }

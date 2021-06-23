@@ -601,6 +601,20 @@
             "distance": "100km"
         }
     ],
+    "comparaisonDomaine": [
+        {
+            "label": "Transport",
+            "value": "Transport"
+        },
+        {
+            "label": "Nourriture",
+            "value": "Nourriture"
+        },
+        {
+            "label": "Electronique",
+            "value": "Electronique"
+        }
+    ],
     "comparaisonEmissionCO2": [
         {
             "domaine": "Transport",

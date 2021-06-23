@@ -102,7 +102,6 @@ export const TrajetSimple = () => {
               <Table.Th>Résultats</Table.Th>
             </Table.Tr>
           </Table.Header>
-
           <Table.Body>
             <Table.Tr>
               <Table.Td>

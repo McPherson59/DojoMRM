@@ -14,3 +14,16 @@
 .container.container-body {
   padding: 0 0 50px 0;
 }
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+td {
+  width: 20%;
+}
+
+.af-form__select-container {
+  display: flex;
+}
