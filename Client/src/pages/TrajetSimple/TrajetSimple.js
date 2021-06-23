@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Number, Button, SelectBase } from '@axa-fr/react-toolkit-all';
+import { Table, Number, Button, Select } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
 import { EmissionService } from '../../services/calc/emission-service';
 import './TrajetSimple.scss';
@@ -105,7 +105,7 @@ export const TrajetSimple = () => {
           <Table.Body>
             <Table.Tr>
               <Table.Td>
-                <SelectBase
+                <Select
                   name="typeCarburant"
                   id="typeCarburant"
                   onChange={({ value }) => setTypeCarburant(value)}
@@ -119,7 +119,7 @@ export const TrajetSimple = () => {
                 />
               </Table.Td>
               <Table.Td>
-                <SelectBase
+                <Select
                   name="typeVehicule"
                   id="typeVehicule"
                   onChange={({ value }) => setTypeVehicule(value)}
@@ -133,7 +133,7 @@ export const TrajetSimple = () => {
                 />
               </Table.Td>
               <Table.Td>
-                <SelectBase
+                <Select
                   name="typeTrajet"
                   id="typeTrajet"
                   onChange={({ value }) => setTypeTrajet(value)}

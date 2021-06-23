@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Number, Button, SelectBase } from '@axa-fr/react-toolkit-all';
+import { Table, Number, Button, Select } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
 import { EmissionService } from '../../services/calc/emission-service';
 import './ComparaisonEmission.scss';
@@ -145,7 +145,7 @@ export const ComparaisonEmission = () => {
           <Table.Body>
             <Table.Tr>
               <Table.Td>
-                <SelectBase
+                <Select
                   name="typeCarburant"
                   id="typeCarburant"
                   onChange={({ value }) => setTypeCarburant(value)}
@@ -159,7 +159,7 @@ export const ComparaisonEmission = () => {
                 />
               </Table.Td>
               <Table.Td>
-                <SelectBase
+                <Select
                   name="typeVehicule"
                   id="typeVehicule"
                   onChange={({ value }) => setTypeVehicule(value)}
@@ -173,7 +173,7 @@ export const ComparaisonEmission = () => {
                 />
               </Table.Td>
               <Table.Td>
-                <SelectBase
+                <Select
                   name="typeTrajet"
                   id="typeTrajet"
                   onChange={({ value }) => setTypeTrajet(value)}
@@ -237,7 +237,7 @@ export const ComparaisonEmission = () => {
             <Table.Body>
               <Table.Tr>
                 <Table.Td>
-                  <SelectBase
+                  <Select
                     name="comparaisonDomaine"
                     id="comparaisonDomaine"
                     onChange={({ value }) => setComparaison(value)}
@@ -253,7 +253,7 @@ export const ComparaisonEmission = () => {
                 <Table.Td>
                   {hasDomaine && (
                     <div>
-                      <SelectBase
+                      <Select
                         name="comparaisonElementsListe"
                         id="comparaisonElementsListe"
                         onChange={({ value }) => setElementComparaison(value)}

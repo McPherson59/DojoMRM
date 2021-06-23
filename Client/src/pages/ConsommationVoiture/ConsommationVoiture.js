@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Number, Button, SelectBase } from '@axa-fr/react-toolkit-all';
+import { Table, Number, Button, Select } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
 import { EmissionService } from '../../services/calc/emission-service';
 import './ConsommationVoiture.scss';
@@ -86,7 +86,7 @@ export const ConsommationVoiture = () => {
           <Table.Body>
             <Table.Tr>
               <Table.Td>
-                <SelectBase
+                <Select
                   name="typeCarburant"
                   id="typeCarburant"
                   onChange={({ value }) => setChangeCarburant(value)}
