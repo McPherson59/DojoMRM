@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Number, Button, Select } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
-import { EmissionService } from '../../services/calc/emission-service';
+import { MrmClientService } from '../../services/mrmclient/mrm-client';
 import './ConsommationVoiture.scss';
 
 export const ConsommationVoiture = () => {
@@ -10,10 +10,11 @@ export const ConsommationVoiture = () => {
   const [uniteCarburant, setUniteCarburant] = useState('L ou kWh');
 
   const [hasResults, setHasResults] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const carburantsData = new DataService();
-  const emissionService = new EmissionService();
+  const emissionService = new MrmClientService();
 
   const [emissionResultat, setEmissionResultat] = useState(0);
   const [energieResultat, setEnergieResultat] = useState(0);
@@ -28,27 +29,28 @@ export const ConsommationVoiture = () => {
     setTypeCarburant(value);
   };
 
-  const calculHandler = () => {
-    const data = carburantsData.getCarburantData(typeCarburant);
-    const emissionParUnite = data.emissionKgCO2ParUnite;
-    const energieParUnite = data.energiekWh;
-
-    setEmissionResultat(
-      emissionService.calculEmissionConsommationVoiture(
-        emissionParUnite,
+  const calculHandler = async () => {
+    const resultat = JSON.parse(
+      await emissionService.getEmissionConsommationVoiture(
+        typeCarburant,
         consommationNumber
       )
     );
 
-    setEnergieResultat(
-      emissionService.calculEnergie(energieParUnite, consommationNumber)
-    );
-
-    setHasResults(true);
+    if (resultat === undefined || resultat === 'error') {
+      setHasError(true);
+      setHasResults(false);
+    } else {
+      setEmissionResultat(resultat.emissionEnergetique.emission);
+      setEnergieResultat(resultat.emissionEnergetique.energie);
+      setHasError(false);
+      setHasResults(true);
+    }
   };
 
   useEffect(() => {
     setHasResults(false);
+    setHasError(false);
     if (consommationNumber > 0 && typeCarburant !== '') {
       setIsDisabled(false);
     } else {
@@ -120,6 +122,13 @@ export const ConsommationVoiture = () => {
                 {hasResults && (
                   <div>
                     Energie : <b>{energieResultat} kWh</b>
+                  </div>
+                )}
+                {hasError && (
+                  <div>
+                    <p className="af-body--error">
+                      Une Erreur vient de se produire.
+                    </p>
                   </div>
                 )}
               </Table.Td>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Number, Button, Select } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
-import { EmissionService } from '../../services/calc/emission-service';
+import { MrmClientService } from '../../services/mrmclient/mrm-client';
 import './TrajetSimple.scss';
 
 export const TrajetSimple = () => {
@@ -11,10 +11,11 @@ export const TrajetSimple = () => {
   const [typeTrajet, setTypeTrajet] = useState('');
 
   const [hasResults, setHasResults] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const Data = new DataService();
-  const emissionService = new EmissionService();
+  const emissionService = new MrmClientService();
 
   const [emissionResultat, setEmissionResultat] = useState(0);
   const [energieResultat, setEnergieResultat] = useState(0);
@@ -31,33 +32,28 @@ export const TrajetSimple = () => {
     return Data.getTypeVehiculesListe();
   };
 
-  const calculHandler = () => {
-    const dataTrajet = Data.getconsommationTrajetPArTypeVehiculeData(
-      Data.getCarburantSimple(typeCarburant),
-      typeVehicule,
-      typeTrajet
-    );
-    const dataCarburant = Data.getCarburantData(typeCarburant);
-    const emissionParUnite = dataCarburant.emissionKgCO2ParUnite;
-    const energieParUnite = dataCarburant.energiekWh;
+  const calculHandler = async () => {
+    const trajets =
+      '[{"type":"' + typeTrajet.toUpperCase() + '","pourcentage":100}]';
 
-    const dataConsommation = emissionService.getConsommationTrajet(
-      distanceNumber,
-      dataTrajet.consommation
-    );
-
-    setEmissionResultat(
-      emissionService.calculEmissionConsommationVoiture(
-        emissionParUnite,
-        dataConsommation
+    const resultat = JSON.parse(
+      await emissionService.getTrajet(
+        Data.getCarburantSimple(typeCarburant),
+        typeVehicule,
+        distanceNumber,
+        trajets
       )
     );
 
-    setEnergieResultat(
-      emissionService.calculEnergie(energieParUnite, dataConsommation)
-    );
-
-    setHasResults(true);
+    if (resultat === undefined || resultat === 'error') {
+      setHasError(true);
+      setHasResults(false);
+    } else {
+      setEmissionResultat(resultat.emissionEnergetique.emission);
+      setEnergieResultat(resultat.emissionEnergetique.energie);
+      setHasError(false);
+      setHasResults(true);
+    }
   };
 
   useEffect(() => {
@@ -167,6 +163,13 @@ export const TrajetSimple = () => {
                 {hasResults && (
                   <div>
                     Energie : <b>{energieResultat} kWh</b>
+                  </div>
+                )}
+                {hasError && (
+                  <div>
+                    <p className="af-body--error">
+                      Une Erreur vient de se produire.
+                    </p>
                   </div>
                 )}
               </Table.Td>

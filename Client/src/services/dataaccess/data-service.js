@@ -53,7 +53,7 @@ export class DataService {
     }
 
     if (carburantLabel.includes('Electrique')) {
-      return 'Ethanol';
+      return 'Electrique';
     }
 
     return CarburantSimple;

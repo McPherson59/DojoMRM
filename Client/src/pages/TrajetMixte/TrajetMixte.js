@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Number, Button, Select } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
-import { EmissionService } from '../../services/calc/emission-service';
+import { MrmClientService } from '../../services/mrmclient/mrm-client';
 import './TrajetMixte.scss';
 
 export const TrajetMixte = () => {
@@ -13,10 +13,11 @@ export const TrajetMixte = () => {
   const [typeTrajet2, setTypeTrajet2] = useState('');
 
   const [hasResults, setHasResults] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const Data = new DataService();
-  const emissionService = new EmissionService();
+  const emissionService = new MrmClientService();
 
   const [emissionResultat, setEmissionResultat] = useState(0);
   const [energieResultat, setEnergieResultat] = useState(0);
@@ -33,50 +34,40 @@ export const TrajetMixte = () => {
     return Data.getTypeVehiculesListe();
   };
 
-  const calculHandler = () => {
-    const dataTrajet = Data.getconsommationTrajetPArTypeVehiculeData(
-      Data.getCarburantSimple(typeCarburant),
-      typeVehicule,
-      typeTrajet
+  const getpourcentage = (dist1, dist2) => {
+    return Math.round((dist1 / (dist1 + dist2)) * 100) / 1;
+  };
+
+  const calculHandler = async () => {
+    const trajets =
+      '[{"type":"' +
+      typeTrajet.toUpperCase() +
+      '","pourcentage":' +
+      getpourcentage(distanceNumber, distanceNumber2) +
+      '},{"type":"' +
+      typeTrajet2.toUpperCase() +
+      '","pourcentage":' +
+      getpourcentage(distanceNumber2, distanceNumber) +
+      '}]';
+
+    const resultat = JSON.parse(
+      await emissionService.getTrajet(
+        Data.getCarburantSimple(typeCarburant),
+        typeVehicule,
+        distanceNumber + distanceNumber2,
+        trajets
+      )
     );
-    const dataTrajet2 = Data.getconsommationTrajetPArTypeVehiculeData(
-      Data.getCarburantSimple(typeCarburant),
-      typeVehicule,
-      typeTrajet2
-    );
-    const dataCarburant = Data.getCarburantData(typeCarburant);
-    const emissionParUnite = dataCarburant.emissionKgCO2ParUnite;
-    const energieParUnite = dataCarburant.energiekWh;
 
-    const dataConsommation = emissionService.getConsommationTrajet(
-      distanceNumber,
-      dataTrajet.consommation
-    );
-
-    const dataConsommation2 = emissionService.getConsommationTrajet(
-      distanceNumber2,
-      dataTrajet2.consommation
-    );
-
-    const emission =
-      emissionService.calculEmissionConsommationVoiture(
-        emissionParUnite,
-        dataConsommation
-      ) +
-      emissionService.calculEmissionConsommationVoiture(
-        emissionParUnite,
-        dataConsommation2
-      );
-
-    setEmissionResultat(emission);
-
-    const energie =
-      emissionService.calculEnergie(energieParUnite, dataConsommation) +
-      emissionService.calculEnergie(energieParUnite, dataConsommation2);
-
-    setEnergieResultat(energie);
-
-    setHasResults(true);
+    if (resultat === undefined || resultat === 'error') {
+      setHasError(true);
+      setHasResults(false);
+    } else {
+      setEmissionResultat(resultat.emissionEnergetique.emission);
+      setEnergieResultat(resultat.emissionEnergetique.energie);
+      setHasError(false);
+      setHasResults(true);
+    }
   };
 
   useEffect(() => {
@@ -198,6 +189,13 @@ export const TrajetMixte = () => {
                 {hasResults && (
                   <div>
                     Energie : <b>{energieResultat} kWh</b>
+                  </div>
+                )}
+                {hasError && (
+                  <div>
+                    <p className="af-body--error">
+                      Une Erreur vient de se produire.
+                    </p>
                   </div>
                 )}
               </Table.Td>

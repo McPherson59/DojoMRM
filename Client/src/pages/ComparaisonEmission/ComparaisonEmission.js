@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Number, Button, Select } from '@axa-fr/react-toolkit-all';
 import { DataService } from '../../services/dataaccess/data-service';
-import { EmissionService } from '../../services/calc/emission-service';
+import { MrmClientService } from '../../services/mrmclient/mrm-client';
 import './ComparaisonEmission.scss';
 
 export const ComparaisonEmission = () => {
@@ -14,11 +14,13 @@ export const ComparaisonEmission = () => {
 
   const [hasResults, setHasResults] = useState(false);
   const [hasComparaison, setHasComparaison] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [hasComparisonError, setHasComparisonError] = useState(false);
   const [hasDomaine, setHasDomaine] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const Data = new DataService();
-  const emissionService = new EmissionService();
+  const emissionService = new MrmClientService();
 
   const [emissionResultat, setEmissionResultat] = useState(0);
   const [energieResultat, setEnergieResultat] = useState(0);
@@ -46,48 +48,46 @@ export const ComparaisonEmission = () => {
     return Data.getComparaisonElementsListe(value);
   };
 
-  const calculHandler = () => {
-    const dataTrajet = Data.getconsommationTrajetPArTypeVehiculeData(
-      Data.getCarburantSimple(typeCarburant),
-      typeVehicule,
-      typeTrajet
-    );
-    const dataCarburant = Data.getCarburantData(typeCarburant);
-    const emissionParUnite = dataCarburant.emissionKgCO2ParUnite;
-    const energieParUnite = dataCarburant.energiekWh;
+  const calculHandler = async () => {
+    const trajets =
+      '[{"type":"' + typeTrajet.toUpperCase() + '","pourcentage":100}]';
 
-    const dataConsommation = emissionService.getConsommationTrajet(
-      distanceNumber,
-      dataTrajet.consommation
-    );
-
-    setEmissionResultat(
-      emissionService.calculEmissionConsommationVoiture(
-        emissionParUnite,
-        dataConsommation
+    const resultat = JSON.parse(
+      await emissionService.getTrajet(
+        Data.getCarburantSimple(typeCarburant),
+        typeVehicule,
+        distanceNumber,
+        trajets
       )
     );
 
-    setEnergieResultat(
-      emissionService.calculEnergie(energieParUnite, dataConsommation)
-    );
-
-    setHasResults(true);
+    if (resultat === undefined || resultat === 'error') {
+      setHasError(true);
+      setHasResults(false);
+    } else {
+      setEmissionResultat(resultat.emissionEnergetique.emission);
+      setEnergieResultat(resultat.emissionEnergetique.energie);
+      setHasError(false);
+      setHasResults(true);
+    }
   };
 
-  const comparaisonHandler = () => {
-    const dataComparaisonItem = Data.getComparaisonElements(
-      ComparaisonElements
-    );
-
-    setEmissionComparaisonElement(
-      emissionService.getComparaison(
+  const comparaisonHandler = async () => {
+    const resultat = JSON.parse(
+      await emissionService.getComparaison(
         emissionResultat,
-        dataComparaisonItem.emissionCO2kg
+        ComparaisonElements
       )
     );
 
-    setHasComparaison(true);
+    if (resultat === undefined || resultat === 'error') {
+      setHasComparisonError(true);
+      setHasComparaison(false);
+    } else {
+      setEmissionComparaisonElement(resultat.result * 100);
+      setHasComparisonError(false);
+      setHasComparaison(true);
+    }
   };
 
   const setComparaison = value => {
@@ -209,6 +209,13 @@ export const ComparaisonEmission = () => {
                     Energie : <b>{energieResultat} kWh</b>
                   </div>
                 )}
+                {hasError && (
+                  <div>
+                    <p className="af-body--error">
+                      Une Erreur vient de se produire.
+                    </p>
+                  </div>
+                )}
               </Table.Td>
             </Table.Tr>
           </Table.Body>
@@ -280,6 +287,13 @@ export const ComparaisonEmission = () => {
                         &nbsp;%
                       </b>{' '}
                       de {ComparaisonElements}
+                    </div>
+                  )}
+                  {hasComparisonError && (
+                    <div>
+                      <p className="af-body--error">
+                        Une Erreur vient de se produire.
+                      </p>
                     </div>
                   )}
                 </Table.Td>
