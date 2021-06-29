@@ -1,29 +1,7 @@
 const configuration = require('./mrm-configuration.json');
 
 export class MrmClientService {
-  async getEmissionConsommationVoiture(carburant, consommation) {
-    const body =
-      '{"vehicule":{ "carburant":"' +
-      carburant.toUpperCase() +
-      '", "consommation":' +
-      consommation +
-      ' } }';
-    console.log(body);
-    // BODY
-    //{
-    //"vehicule":{
-    //      "carburant":"GASOIL",
-    //      "consommation":20
-    //  }
-    // }
-
-    // TARGET
-    //return await this.performConnection(body, 'apiConsommationVoiture');
-
-    return '{"emissionEnergetique": {"emission": 53.4,"energie": 214.8}}';
-  }
-
-  async getTrajet(carburant, typeVehicule, distance, trajets) {
+  getBodyTrajet(carburant, typeVehicule, distance, trajets) {
     const body =
       '{"vehicule":{ "carburant":"' +
       carburant.toUpperCase() +
@@ -34,72 +12,48 @@ export class MrmClientService {
       ', "trajets":' +
       trajets +
       ' } }';
-    console.log(body);
 
-    // BODY
-    //   {
-    //     "vehicule":{
-    //         "carburant":"ESSENCE",
-    //         "type":"A",
-    //         "kilometres":20,
-    //         "trajets":[
-    //             {
-    //                 "type":"VILLE",
-    //                 "pourcentage":50
-    //             }
-    //        ]
-    //     }
-    // }
-
-    // TARGET
-    //return await this.performConnection(body, 'apiConsommationVoiture');
-
-    return '{"emissionEnergetique": {"emission": 1.656,"energie": 6.9336}}';
+    return body;
   }
 
-  async getComparaison(emission, item) {
+  getTrajetsSimples(typeTrajet) {
+    return '[{"type":"' + typeTrajet.toUpperCase() + '","pourcentage":100}]';
+  }
+
+  getTrajetsMixtes(typeTrajet, distanceNumber, typeTrajet2, distanceNumber2) {
+    const trajets =
+      '[{"type":"' +
+      typeTrajet.toUpperCase() +
+      '","pourcentage":' +
+      this.getPourcentage(distanceNumber, distanceNumber2) +
+      '},{"type":"' +
+      typeTrajet2.toUpperCase() +
+      '","pourcentage":' +
+      this.getPourcentage(distanceNumber2, distanceNumber) +
+      '}]';
+
+    return trajets;
+  }
+
+  getBodyComparaisonVoiture(carburant, consommation) {
+    const body =
+      '{"vehicule":{ "carburant":"' +
+      carburant.toUpperCase() +
+      '", "consommation":' +
+      consommation +
+      ' } }';
+
+    return body;
+  }
+
+  getBodyComparaison(emission, item) {
     const body =
       '{"emissionEnergetique":{"emission":' +
       emission +
       ',"energie":null},"item" : {"nom":"' +
       item +
       '"}}';
-    console.log(body);
-
-    // BODY  = {
-    //	"emissionEnergetique":{
-    //	"emission":2.714,
-    //	"energie":null
-    //	},
-    //"item" : {
-    //"nom":"Vol_PNY"
-    //}
-    //}
-
-    // TARGET
-    //return await this.performConnection(body, 'apiConsommationVoiture');
-
-    return '{"result": 0.0054}';
-  }
-
-  async performConnection(Body, apiName) {
-    const url = this.getUrl(apiName);
-
-    await fetch(url, {
-      method: 'POST',
-      body: Body,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST,GET,PUT,UPDATE,OPTIONS',
-        'Content-Type': 'application/json',
-      },
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return 'error';
-      }
-    });
+    return body;
   }
 
   getUrl(apiName) {
@@ -107,15 +61,31 @@ export class MrmClientService {
     switch (apiName) {
       case 'apiConsommationVoiture':
         uri = configuration.apiConsommationVoiture;
+        break;
       case 'apiTrajetSimple':
-        uri = configuration.apiConsommationVoiture;
+        uri = configuration.apiTrajetSimple;
+        break;
       case 'apiTrajetMixte':
-        uri = configuration.apiConsommationVoiture;
+        uri = configuration.apiTrajetMixte;
+        break;
       case 'apiComparaison':
-        uri = configuration.apiConsommationVoiture;
+        uri = configuration.apiComparaison;
+        break;
     }
 
     const url = configuration.url + uri;
     return url;
   }
+
+  calculRound(unit) {
+    return Math.round(unit * 100) / 100;
+  }
+
+  calculPourcentage(unit) {
+    return Math.round(unit * 10000) / 100;
+  }
+
+  getPourcentage = (dist1, dist2) => {
+    return Math.round((dist1 / (dist1 + dist2)) * 100) / 1;
+  };
 }

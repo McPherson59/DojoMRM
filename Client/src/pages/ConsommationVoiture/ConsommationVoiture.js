@@ -29,23 +29,50 @@ export const ConsommationVoiture = () => {
     setTypeCarburant(value);
   };
 
-  const calculHandler = async () => {
-    const resultat = JSON.parse(
-      await emissionService.getEmissionConsommationVoiture(
+  const calculHandler = () => {
+    performConnection(
+      emissionService.getBodyComparaisonVoiture(
         typeCarburant,
         consommationNumber
       )
     );
+  };
 
-    if (resultat === undefined || resultat === 'error') {
-      setHasError(true);
-      setHasResults(false);
-    } else {
-      setEmissionResultat(resultat.emissionEnergetique.emission);
-      setEnergieResultat(resultat.emissionEnergetique.energie);
-      setHasError(false);
-      setHasResults(true);
-    }
+  const calculResultat = resultat => {
+    setEmissionResultat(
+      emissionService.calculRound(resultat.emissionEnergetique.emission)
+    );
+    setEnergieResultat(
+      emissionService.calculRound(resultat.emissionEnergetique.energie)
+    );
+    setHasError(false);
+    setHasResults(true);
+  };
+
+  const calculError = () => {
+    setHasError(true);
+    setHasResults(false);
+  };
+
+  const performConnection = Body => {
+    const url = emissionService.getUrl('apiConsommationVoiture');
+
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: Body,
+    })
+      .then(response => response.json())
+      .then(json => {
+        calculResultat(json);
+      })
+      .catch(e => {
+        calculError();
+      });
   };
 
   useEffect(() => {

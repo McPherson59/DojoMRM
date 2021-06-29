@@ -1,5 +1,5 @@
 {
-    "url": "http://MyApp:8080/Dojo_Emission_Co2/v1.0/emissionCo2/",
+    "url": "http://localhost:8080/Dojo_Emission_Co2/v1.0/emissionCo2/",
     "apiConsommationVoiture": "calculate",
     "apiTrajetSimple": "calculate",
     "apiTrajetMixte": "calculate",

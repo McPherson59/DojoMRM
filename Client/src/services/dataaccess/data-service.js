@@ -11,6 +11,10 @@ export class DataService {
     return characteristics.carburantsListe;
   }
 
+  getCarburantsListeSimple() {
+    return characteristics.carburantsListeSimple;
+  }
+
   getTrajetsListe() {
     return characteristics.trajetsListe;
   }
@@ -53,7 +57,7 @@ export class DataService {
     }
 
     if (carburantLabel.includes('Electrique')) {
-      return 'Electrique';
+      return 'Electrique_fr';
     }
 
     return CarburantSimple;
@@ -66,7 +70,7 @@ export class DataService {
 
     const transformedDomaine = rawDomaine.map(obj => {
       return {
-        value: obj.item,
+        value: obj.value,
         label: obj.item,
       };
     });
@@ -77,6 +81,12 @@ export class DataService {
   getComparaisonElements(item) {
     return characteristics.comparaisonEmissionCO2.find(
       characteristic => characteristic.item === item
+    );
+  }
+
+  getLabelComparaisonElementsByValue(value) {
+    return characteristics.comparaisonEmissionCO2.find(
+      characteristic => characteristic.value === value
     );
   }
 }

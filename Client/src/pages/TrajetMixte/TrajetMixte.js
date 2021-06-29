@@ -23,7 +23,7 @@ export const TrajetMixte = () => {
   const [energieResultat, setEnergieResultat] = useState(0);
 
   const getCarburantOptions = () => {
-    return Data.getCarburantsListe();
+    return Data.getCarburantsListeSimple();
   };
 
   const getTrajetOptions = () => {
@@ -34,40 +34,59 @@ export const TrajetMixte = () => {
     return Data.getTypeVehiculesListe();
   };
 
-  const getpourcentage = (dist1, dist2) => {
-    return Math.round((dist1 / (dist1 + dist2)) * 100) / 1;
-  };
-
   const calculHandler = async () => {
-    const trajets =
-      '[{"type":"' +
-      typeTrajet.toUpperCase() +
-      '","pourcentage":' +
-      getpourcentage(distanceNumber, distanceNumber2) +
-      '},{"type":"' +
-      typeTrajet2.toUpperCase() +
-      '","pourcentage":' +
-      getpourcentage(distanceNumber2, distanceNumber) +
-      '}]';
+    const trajets = emissionService.getTrajetsMixtes(
+      typeTrajet,
+      distanceNumber,
+      typeTrajet2,
+      distanceNumber2
+    );
 
-    const resultat = JSON.parse(
-      await emissionService.getTrajet(
+    performConnection(
+      emissionService.getBodyTrajet(
         Data.getCarburantSimple(typeCarburant),
         typeVehicule,
         distanceNumber + distanceNumber2,
         trajets
       )
     );
+  };
 
-    if (resultat === undefined || resultat === 'error') {
-      setHasError(true);
-      setHasResults(false);
-    } else {
-      setEmissionResultat(resultat.emissionEnergetique.emission);
-      setEnergieResultat(resultat.emissionEnergetique.energie);
-      setHasError(false);
-      setHasResults(true);
-    }
+  const performConnection = Body => {
+    const url = emissionService.getUrl('apiTrajetMixte');
+
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: Body,
+    })
+      .then(response => response.json())
+      .then(json => {
+        calculResultat(json);
+      })
+      .catch(e => {
+        calculError();
+      });
+  };
+
+  const calculResultat = resultat => {
+    setEmissionResultat(
+      emissionService.calculRound(resultat.emissionEnergetique.emission)
+    );
+    setEnergieResultat(
+      emissionService.calculRound(resultat.emissionEnergetique.energie)
+    );
+    setHasError(emissionService.calculRound(false));
+    setHasResults(emissionService.calculRound(true));
+  };
+
+  const calculError = () => {
+    setHasError(true);
+    setHasResults(false);
   };
 
   useEffect(() => {
@@ -174,7 +193,7 @@ export const TrajetMixte = () => {
                   name="distance"
                   value={distanceNumber}
                   type="number"
-                  step="0.1"
+                  step="1"
                   onChange={({ value }) => {
                     setDistanceNumber(value);
                   }}
@@ -224,7 +243,7 @@ export const TrajetMixte = () => {
                   name="distance2"
                   value={distanceNumber2}
                   type="number"
-                  step="0.1"
+                  step="1"
                   onChange={({ value }) => {
                     setDistanceNumber2(value);
                   }}

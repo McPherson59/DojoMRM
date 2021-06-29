@@ -29,7 +29,7 @@ export const ComparaisonEmission = () => {
   );
 
   const getCarburantOptions = () => {
-    return Data.getCarburantsListe();
+    return Data.getCarburantsListeSimple();
   };
 
   const getTrajetOptions = () => {
@@ -49,45 +49,96 @@ export const ComparaisonEmission = () => {
   };
 
   const calculHandler = async () => {
-    const trajets =
-      '[{"type":"' + typeTrajet.toUpperCase() + '","pourcentage":100}]';
+    const trajets = emissionService.getTrajetsSimples(typeTrajet);
 
-    const resultat = JSON.parse(
-      await emissionService.getTrajet(
+    performConnection(
+      emissionService.getBodyTrajet(
         Data.getCarburantSimple(typeCarburant),
         typeVehicule,
         distanceNumber,
         trajets
-      )
+      ),
+      emissionService.getUrl('apiTrajetSimple')
     );
-
-    if (resultat === undefined || resultat === 'error') {
-      setHasError(true);
-      setHasResults(false);
-    } else {
-      setEmissionResultat(resultat.emissionEnergetique.emission);
-      setEnergieResultat(resultat.emissionEnergetique.energie);
-      setHasError(false);
-      setHasResults(true);
-    }
   };
 
-  const comparaisonHandler = async () => {
-    const resultat = JSON.parse(
-      await emissionService.getComparaison(
-        emissionResultat,
-        ComparaisonElements
-      )
+  const calculResultat = resultat => {
+    setEmissionResultat(
+      emissionService.calculRound(resultat.emissionEnergetique.emission)
+    );
+    setEnergieResultat(
+      emissionService.calculRound(resultat.emissionEnergetique.energie)
+    );
+    setHasError(false);
+    setHasResults(true);
+  };
+
+  const calculError = () => {
+    setHasError(true);
+    setHasResults(false);
+  };
+
+  const performConnection = (Body, url) => {
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: Body,
+    })
+      .then(response => response.json())
+      .then(json => {
+        calculResultat(json);
+      })
+      .catch(e => {
+        calculError();
+      });
+  };
+
+  const comparaisonHandler = () => {
+    const body = emissionService.getBodyComparaison(
+      emissionResultat,
+      ComparaisonElements
     );
 
-    if (resultat === undefined || resultat === 'error') {
-      setHasComparisonError(true);
-      setHasComparaison(false);
-    } else {
-      setEmissionComparaisonElement(resultat.result * 100);
-      setHasComparisonError(false);
-      setHasComparaison(true);
-    }
+    performConnectionComparaison(
+      body,
+      emissionService.getUrl('apiComparaison')
+    );
+  };
+
+  const performConnectionComparaison = (Body, url) => {
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: Body,
+    })
+      .then(response => response.json())
+      .then(json => {
+        calculResultatComparaison(json);
+      })
+      .catch(e => {
+        calculErrorComparaison();
+      });
+  };
+
+  const calculResultatComparaison = resultat => {
+    setEmissionComparaisonElement(
+      emissionService.calculPourcentage(resultat.result)
+    );
+    setHasComparisonError(false);
+    setHasComparaison(true);
+  };
+
+  const calculErrorComparaison = () => {
+    setHasComparisonError(true);
+    setHasComparaison(false);
   };
 
   const setComparaison = value => {
@@ -103,6 +154,7 @@ export const ComparaisonEmission = () => {
   };
 
   useEffect(() => {
+    setHasComparaison(false);
     setHasResults(false);
     if (
       distanceNumber > 0 &&
@@ -192,7 +244,7 @@ export const ComparaisonEmission = () => {
                   name="distance"
                   value={distanceNumber}
                   type="number"
-                  step="0.1"
+                  step="1"
                   onChange={({ value }) => {
                     setDistanceNumber(value);
                   }}
@@ -286,7 +338,12 @@ export const ComparaisonEmission = () => {
                         {emissionComparaisonElement}
                         &nbsp;%
                       </b>{' '}
-                      de {ComparaisonElements}
+                      de{' '}
+                      {
+                        Data.getLabelComparaisonElementsByValue(
+                          ComparaisonElements
+                        ).item
+                      }
                     </div>
                   )}
                   {hasComparisonError && (

@@ -14,6 +14,15 @@ import oidcConfiguration from 'configuration';
 import './App.scss';
 
 const App = ({ oidcEnabled = true }) => {
+  const myHeaders = new Headers();
+  myHeaders.append('Access-Control-Allow-Origin', '*');
+  myHeaders.append(
+    'Access-Control-Allow-Methods',
+    'POST,GET,PUT,UPDATE,OPTIONS'
+  );
+  myHeaders.delete('strict-origin-when-cross-origin');
+  myHeaders.delete('Referrer-Policy');
+
   return (
     <AuthenticationProvider
       configuration={oidcConfiguration.is4}

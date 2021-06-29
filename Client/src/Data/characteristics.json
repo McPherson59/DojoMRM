@@ -9,8 +9,8 @@
             "value": "Essence"
         },
         {
-            "label": "Ethanol ( E85 )",
-            "value": "Ethanol ( E85 )"
+            "label": "Ethanol (E85)",
+            "value": "ETHANOL"
         },
         {
             "label": "GPL",
@@ -18,19 +18,41 @@
         },
         {
             "label": "Electrique (Allemagne)",
-            "value": "Electrique (Allemagne)"
+            "value": "ELECTRIQUE_DE"
         },
         {
             "label": "Electrique (Chine)",
-            "value": "Electrique (Chine)"
+            "value": "ELECTRIQUE_CN"
         },
         {
             "label": "Electrique (Etats-Unis)",
-            "value": "Electrique (Etats-Unis)"
+            "value": "ELECTRIQUE_US"
         },
         {
             "label": "Electrique (France)",
-            "value": "Electrique (France)"
+            "value": "ELECTRIQUE_FR"
+        }
+    ],
+    "carburantsListeSimple": [
+        {
+            "label": "Gasoil",
+            "value": "Gasoil"
+        },
+        {
+            "label": "Essence",
+            "value": "Essence"
+        },
+        {
+            "label": "Ethanol (E85)",
+            "value": "ETHANOL"
+        },
+        {
+            "label": "GPL",
+            "value": "GPL"
+        },
+        {
+            "label": "Electrique (France)",
+            "value": "ELECTRIQUE_FR"
         }
     ],
     "trajetsListe": [
@@ -57,7 +79,7 @@
             "unite": "l"
         },
         {
-            "carburant": "Ethanol ( E85 )",
+            "carburant": "ETHANOL",
             "emissionKgCO2ParUnite": 1.65,
             "energiekWh": 6.5,
             "unite": "l"
@@ -69,25 +91,25 @@
             "unite": "l"
         },
         {
-            "carburant": "Electrique (Allemagne)",
+            "carburant": "ELECTRIQUE_DE",
             "emissionKgCO2ParUnite": 0.435,
             "energiekWh": 1,
             "unite": "kWh"
         },
         {
-            "carburant": "Electrique (Chine)",
+            "carburant": "ELECTRIQUE_CN",
             "emissionKgCO2ParUnite": 0.766,
             "energiekWh": 1,
             "unite": "kWh"
         },
         {
-            "carburant": "Electrique (Etats-Unis)",
+            "carburant": "ELECTRIQUE_US",
             "emissionKgCO2ParUnite": 0.522,
             "energiekWh": 1,
             "unite": "kWh"
         },
         {
-            "carburant": "Electrique (France)",
+            "carburant": "ELECTRIQUE_FR",
             "emissionKgCO2ParUnite": 0.102,
             "energiekWh": 1,
             "unite": "kWh"
@@ -619,41 +641,61 @@
         {
             "domaine": "Transport",
             "item": "Vol Aller Paris/NY pour 1 personne",
+            "value": "Vol_PNY",
             "emissionCO2kg": 500
         },
         {
             "domaine": "Transport",
             "item": "Vol Aller-Retour Paris/NY pour 1 personne",
+            "value": "Vol_AR_PNY",
             "emissionCO2kg": 1000
         },
         {
             "domaine": "Nourriture",
             "item": "1 kg de boeuf",
+            "value": "BOEUF",
             "emissionCO2kg": 35.8
         },
         {
             "domaine": "Nourriture",
             "item": "1 kg de porc",
+            "value": "PORC",
             "emissionCO2kg": 12.1
         },
         {
             "domaine": "Nourriture",
             "item": "1 kg de poulet",
+            "value": "POULET",
             "emissionCO2kg": 6.9
+        },
+        {
+            "domaine": "Nourriture",
+            "item": "1 kg de patates",
+            "value": "PATATES",
+            "emissionCO2kg": 0.01
+        },
+        {
+            "domaine": "Nourriture",
+            "item": "1 kg de tomates",
+            "value": "TOMATES",
+            "emissionCO2kg": 0.01
         },
         {
             "domaine": "Electronique",
             "item": "1 TV de 40 à 49 pouces",
+            "value": "TV",
             "emissionCO2kg": 55
         },
         {
             "domaine": "Electronique",
             "item": "1 ordinateur portable",
+            "value": "LAPTOP",
             "emissionCO2kg": 30
         },
         {
             "domaine": "Electronique",
             "item": "1 smartphone",
+            "value": "SMARTPHONE",
             "emissionCO2kg": 18
         }
     ],
