@@ -669,18 +669,6 @@
             "emissionCO2kg": 6.9
         },
         {
-            "domaine": "Nourriture",
-            "item": "1 kg de patates",
-            "value": "PATATES",
-            "emissionCO2kg": 0.01
-        },
-        {
-            "domaine": "Nourriture",
-            "item": "1 kg de tomates",
-            "value": "TOMATES",
-            "emissionCO2kg": 0.01
-        },
-        {
             "domaine": "Electronique",
             "item": "1 TV de 40 à 49 pouces",
             "value": "TV",

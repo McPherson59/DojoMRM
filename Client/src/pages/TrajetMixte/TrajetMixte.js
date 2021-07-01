@@ -80,8 +80,8 @@ export const TrajetMixte = () => {
     setEnergieResultat(
       emissionService.calculRound(resultat.emissionEnergetique.energie)
     );
-    setHasError(emissionService.calculRound(false));
-    setHasResults(emissionService.calculRound(true));
+    setHasError(false);
+    setHasResults(true);
   };
 
   const calculError = () => {

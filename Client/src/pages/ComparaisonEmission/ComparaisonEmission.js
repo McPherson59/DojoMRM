@@ -244,7 +244,7 @@ export const ComparaisonEmission = () => {
                   name="distance"
                   value={distanceNumber}
                   type="number"
-                  step="1"
+                  step="0,1"
                   onChange={({ value }) => {
                     setDistanceNumber(value);
                   }}
